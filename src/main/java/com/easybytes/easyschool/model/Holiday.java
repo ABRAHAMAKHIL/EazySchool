@@ -2,7 +2,7 @@ package com.easybytes.easyschool.model;
 
 import lombok.Data;
 
-@Data
+@Data	
 public class Holiday {
 
 	private final String day;

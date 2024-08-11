@@ -6,20 +6,36 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.easybytes.easyschool.model.Holiday;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Controller
 public class HolidayController {
 
 
 
-	    @RequestMapping("/holiday")
-	    public String displayHolidays(Model model) {
-	    
+	    @RequestMapping("/holiday/{display}")
+	    public String displayHolidays(@PathVariable String display,   Model model) {
+	    	if(display !=null & display.equals("all")) {
+	    		
+	    		model.addAttribute("Festival",true);
+	    		
+		    	model.addAttribute("Federal",true);	
+	    	}else if(display !=null  & display.equals("festival")) {
+	    		
+	    		model.addAttribute("Festival",true);
+	    	}else if(display !=null  & display.equals("federal")) {
+	    		
+	    		model.addAttribute("Federal",true);	
+	    	}
+	    	
+	    	
 	        List<Holiday> holidays = Arrays.asList(
 	                new Holiday(" Jan 1 ","New Year's Day", Holiday.Type.FESTIVAL),
 	                new Holiday(" Oct 31 ","Halloween", Holiday.Type.FESTIVAL),
